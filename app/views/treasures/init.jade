@@ -1,6 +1,6 @@
 extends ../shared/template
 block content
-  h2 Add a treasure
+  h2 Add A Treasure
   .panel.panel-default
     .panel-body
       form(role='form', method='post', action='/treasures', enctype='multipart/form-data')
@@ -25,7 +25,7 @@ block content
             .form-group
               label Difficulty
               br
-              select#diff(name='difficulty')
+              select(name='difficulty')
                 option(value='1') Easy
                 option(value='2') Medium
                 option(value='3') Hard
