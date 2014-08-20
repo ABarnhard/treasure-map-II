@@ -1,6 +1,8 @@
 'use strict';
 
-var Mongo = require('mongodb');
+var Mongo = require('mongodb'),
+    fs    = require('fs'),
+    path  = require('path');
 
 function Treasure(o){
   this.name = o.name[0];
@@ -35,8 +37,35 @@ Treasure.found = function(id, cb){
   Treasure.collection.update({_id:id}, {$set:{isFound:true}}, cb);
 };
 
+Treasure.create = function(fields, files, cb){
+  var t = new Treasure(fields);
+  t.save(function(){
+    t.addPhotos(files, cb);
+  });
+};
+
 Treasure.prototype.save = function(cb){
   Treasure.collection.save(this, cb);
+};
+
+Treasure.prototype.addPhotos = function(files, cb){
+  var dir    = __dirname + '/../static/img/' + this._id,
+      staticRoot   = '/img/' + this._id + '/',
+      exists = fs.existsSync(dir),
+      self   = this;
+
+  if(!exists){
+    fs.mkdirSync(dir);
+  }
+  files.photos.forEach(function(photo){
+    var ext = path.extname(photo.path),
+        fileName = self.photos.length + ext,
+        rel = staticRoot + fileName,
+        abs = dir + '/' + fileName;
+    fs.renameSync(photo.path, abs);
+    self.photos.push(rel);
+  });
+  self.save(cb);
 };
 
 module.exports = Treasure;
