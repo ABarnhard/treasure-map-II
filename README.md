@@ -1,28 +1,25 @@
-## name of project
+## Treasure Map II
 ### Code Badges
-build status icon
-coverage status icon
+[![Build Status](https://travis-ci.org/ABarnhard/treasure-map-II.svg)](https://travis-ci.org/ABarnhard/treasure-map-II)
+[![Coverage Status](https://coveralls.io/repos/ABarnhard/treasure-map-II/badge.png)](https://coveralls.io/r/ABarnhard/treasure-map-II)
 
 ### About
-write a description about your project
+An app for pirates who want to find their buried treasure
 
 ### Models
 ```
-Model 1
-prop-a
-prop-b
-.classMethod-c
-#instanceMethod-d
+Treasure
+----------
+order
+name
+difficulty
+isFound
+location[lat]
+location[lng]
+hints
+photos
+tags
 ```
-
-```
-Model 2
-prop-e
-prop-f
-.classMethod-g
-#instanceMethod-h
-```
-
 ### Features
 - feature 1
 - feature 2
@@ -35,7 +32,7 @@ $ npm test
 ```
 
 ### Contributors
-- [Chyld Medford](https://github.com/chyld)
+- [Adam Barnhard](https://github.com/abarnhard)
 
 ### License
 [MIT](LICENSE)
