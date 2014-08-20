@@ -5,11 +5,12 @@
 
 var expect    = require('chai').expect,
     Treasure  = require('../../app/models/treasure'),
+    Mongo     = require('mongodb'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
     db        = 'treasure-map-test',
     oid       = '000000000000000000000002',
-    obj       = {name:'Rubies', difficulty:'1', order:'4', loc:{name:'Unknown', lat:'0', lng:'0'}, tags:'tag1, tag2', photos:[], hints:{1:'hint 1', 2:'hint 2'}};
+    obj       = {name:['Rubies'], difficulty:['1'], order:['4'], loc:['Unknown', '0', '0'], tags:['tag1, tag2'], photos:[], hints:['hint 1', 'hint 2']};
 
 describe('Treasure', function(){
   before(function(done){
@@ -68,6 +69,16 @@ describe('Treasure', function(){
           expect(t.isFound).to.equal(true);
           done();
         });
+      });
+    });
+  });
+
+  describe('#save', function(){
+    it('should save the object in the databse', function(done){
+      var t = new Treasure(obj);
+      t.save(function(){
+        expect(t._id).to.be.instanceof(Mongo.ObjectID);
+        done();
       });
     });
   });

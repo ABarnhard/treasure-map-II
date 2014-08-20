@@ -3,16 +3,17 @@
 var Mongo = require('mongodb');
 
 function Treasure(o){
-  this.name = o.name;
-  this.difficulty = o.difficulty * 1;
-  this.order = o.order * 1;
+  this.name = o.name[0];
+  this.difficulty = o.difficulty[0] * 1;
+  this.order = o.order[0] * 1;
+  // 0: name, 1: lat, 2: lng
   this.loc = {};
-  this.loc.name = o.loc.name;
-  this.loc.lat = parseFloat(o.loc.lat);
-  this.loc.lng = parseFloat(o.loc.lng);
-  this.tags = o.tags.split(',').map(function(s){return s.trim();});
+  this.loc.name = o.loc[0];
+  this.loc.lat = parseFloat(o.loc[1]);
+  this.loc.lng = parseFloat(o.loc[2]);
+  this.tags = o.tags[0].split(',').map(function(s){return s.trim();});
   this.photos = [];
-  this.hints = makeArray(o.hints);
+  this.hints = o.hints;
   this.isFound = false;
 }
 
@@ -34,15 +35,9 @@ Treasure.found = function(id, cb){
   Treasure.collection.update({_id:id}, {$set:{isFound:true}}, cb);
 };
 
+Treasure.prototype.save = function(cb){
+  Treasure.collection.save(this, cb);
+};
+
 module.exports = Treasure;
 
-// Helper Functions
-// {1: "string 1", 2: "string 2"}
-function makeArray(o){
-  var keys  = Object.keys(o),
-      hints = [];
-  keys.forEach(function(key){
-    hints.push(o[key]);
-  });
-  return hints;
-}
