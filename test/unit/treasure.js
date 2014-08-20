@@ -8,6 +8,7 @@ var expect    = require('chai').expect,
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
     db        = 'treasure-map-test',
+    oid       = '000000000000000000000002',
     obj       = {name:'Rubies', difficulty:'1', order:'4', loc:{name:'Unknown', lat:'0', lng:'0'}, tags:'tag1, tag2', photos:[], hints:{1:'hint 1', 2:'hint 2'}};
 
 describe('Treasure', function(){
@@ -38,6 +39,7 @@ describe('Treasure', function(){
       expect(t.photos).to.have.length(0);
       expect(t.hints).to.have.length(2);
       expect(t.hints[0]).to.equal('hint 1');
+      expect(t.isFound).to.equal(false);
     });
   });
 
@@ -49,5 +51,26 @@ describe('Treasure', function(){
       });
     });
   });
+
+  describe('.findById', function(){
+    it('should find a treasure object by it\'s ID', function(done){
+      Treasure.findById(oid, function(err, t){
+        expect(t._id.toString()).to.equal(oid);
+        done();
+      });
+    });
+  });
+
+  describe('.found', function(){
+    it('should update a treasures isFound property to true', function(done){
+      Treasure.found(oid, function(){
+        Treasure.findById(oid, function(err, t){
+          expect(t.isFound).to.equal(true);
+          done();
+        });
+      });
+    });
+  });
+
 });
 
