@@ -1,0 +1,33 @@
+{
+  "_id":{"$oid":"000000000000000000000001"},
+  "name":"Gold",
+  "difficulty":3,
+  "order":1,
+  "loc":{"name":"London, UK", "lat":51.5073509, "lng":-0.1277582999999822},
+  "photos":["/img/000000000000000000000001/0.png", "/img/000000000000000000000001/1.png"],
+  "hints":["hint 1", "hint 2"],
+  "tags":["tag 1", "tag 2"],
+  "isFound":false
+}
+{
+  "_id":{"$oid":"000000000000000000000002"},
+  "name":"Gold",
+  "difficulty":2,
+  "order":2,
+  "loc":{"name":"London, UK", "lat":52.5073509, "lng":-0.1277582999999822},
+  "photos":["/img/000000000000000000000002/0.png", "/img/000000000000000000000002/1.png"],
+  "hints":["hint 1", "hint 2"],
+  "tags":["tag 1", "tag 2"],
+  "isFound":false
+}
+{
+  "_id":{"$oid":"000000000000000000000003"},
+  "name":"Gold",
+  "difficulty":1,
+  "order":3,
+  "loc":{"name":"London, UK", "lat":53.5073509, "lng":-0.1277582999999822},
+  "photos":["/img/000000000000000000000003/0.png", "/img/000000000000000000000003/1.png"],
+  "hints":["hint 1", "hint 2"],
+  "tags":["tag 1", "tag 2"],
+  "isFound":false
+}
