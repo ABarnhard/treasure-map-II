@@ -4,20 +4,22 @@ html(lang='en')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    title Express.js Template
+    title Treasure Map
     link(href='/bootstrap/css/bootstrap.min.css', rel='stylesheet')
     link(rel='stylesheet', href='/css/style.css')
   body
-    include nav
-    .container
-      .row
-        .col-xs-12
-          block content
+    .container-fluid
+      include nav
+      .container
+        .row
+          .col-xs-12
+            block content
 
     script(src='/js/vendor/jquery-2.1.1.min.js')
     script(src='/js/vendor/lodash.min.js')
     script(src='/js/vendor/moment.min.js')
     script(src='/bootstrap/js/bootstrap.min.js')
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAL8EZ1bCRT00vK8W8oALBD_LUlpEQvHKQ&sensor=true')
     script(src='/js/user/main.js')
 
     block scripts
