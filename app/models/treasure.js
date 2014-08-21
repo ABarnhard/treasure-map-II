@@ -17,6 +17,7 @@ function Treasure(o){
   this.photos = [];
   this.hints = o.hints;
   this.isFound = false;
+  this.isLinkable = this.order === 1 ? true : false;
 }
 
 Object.defineProperty(Treasure, 'collection', {
