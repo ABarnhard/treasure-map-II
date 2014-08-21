@@ -24,14 +24,14 @@ Object.defineProperty(Treasure, 'collection', {
 });
 
 Treasure.query = function(query, cb){
+  // console.log('model.query.query', query);
   var filter = {},
-      options = {};
+      sort   = {};
   if(query.tag){filter = {tags:{$in:[query.tag]}};}
-  if(query.sortBy){
-    var sort = (query.order) ? query.order * 1 : 1;
-    options.sort = [[query.sortBy,sort]];
-  }
-  Treasure.collection.find(query, options).toArray(cb);
+  if(query.sort){sort[query.sort] = query.order * 1;}
+  // console.log('model.filter', filter);
+  // console.log('model.sort', sort);
+  Treasure.collection.find(filter).sort(sort).toArray(cb);
 };
 
 Treasure.count = function(cb){

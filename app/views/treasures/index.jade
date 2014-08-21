@@ -10,12 +10,12 @@ block content
           table.table.table-hover
             thead
               tr
-                th Name
-                th Location
-                th Difficulty
+                th!= linkBuilder.sort(query, 'name', 'Name')
+                th!= linkBuilder.sort(query, 'loc.name', 'Location')
+                th!= linkBuilder.sort(query, 'difficulty', 'Difficulty')
                 th Tags
-                th Order
-                th Found
+                th!= linkBuilder.sort(query, 'order',  'Order')
+                th!= linkBuilder.sort(query, 'isFound',  'Found')
             tbody
               each treasure in treasures
                 tr(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}', data-order='#{treasure.order}')

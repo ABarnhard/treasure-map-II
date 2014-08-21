@@ -27,8 +27,8 @@ exports.tags = function(query, tags){
 };
 
 exports.sort = function(query, name, display){
-  var direction = query.direction ? query.direction * -1 : 1,
+  var order = query.order ? query.order * -1 : 1,
       tag = query.tag ? '&tag=' + query.tag : '',
-      link = '<a href="/treasures?sort=' + name + '&direction=' + direction + tag + '">'+display+'</a>';
+      link = '<a href="/treasures?sort=' + name + '&order=' + order + tag + '">'+display+'</a>';
   return link;
 };
