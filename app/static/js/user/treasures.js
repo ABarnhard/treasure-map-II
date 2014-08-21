@@ -7,7 +7,7 @@
   var map;
 
   $(document).ready(function(){
-    initMap(36.2, -86.7, 2);
+    initMap(39.8282, -98.5795, 4);
     var positions = getPositions();
     // console.log(positions);
     positions.forEach(function(pos){
@@ -18,7 +18,7 @@
 
   function addMarker(lat, lng, name){
     var latLng = new google.maps.LatLng(lat, lng);
-    new google.maps.Marker({map: map, position: latLng, title: name, animation: google.maps.Animation.DROP, icon: '/img/zombie.gif'});
+    new google.maps.Marker({map: map, position: latLng, title: name, animation: google.maps.Animation.DROP});
   }
 
   function getPositions(){

@@ -23,8 +23,19 @@ Object.defineProperty(Treasure, 'collection', {
   get: function(){return global.mongodb.collection('treasures');}
 });
 
-Treasure.query = function(query, sort, cb){
-  Treasure.collection.find(query, sort).toArray(cb);
+Treasure.query = function(query, cb){
+  var filter = {},
+      options = {};
+  if(query.tag){filter = {tags:{$in:[query.tag]}};}
+  if(query.sortBy){
+    var sort = (query.order) ? query.order * 1 : 1;
+    options.sort = [[query.sortBy,sort]];
+  }
+  Treasure.collection.find(query, options).toArray(cb);
+};
+
+Treasure.count = function(cb){
+  Treasure.collection.count(cb);
 };
 
 Treasure.findById = function(id, cb){

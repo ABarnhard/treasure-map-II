@@ -5,12 +5,16 @@ var mp       = require('multiparty'),
 
 exports.index = function(req, res){
   Treasure.query(req.query, function(err, treasures){
+    //console.log(treasures);
     res.render('treasures/index', {treasures:treasures});
   });
 };
 
 exports.init = function(req, res){
-  res.render('treasures/init');
+  Treasure.count(function(err, order){
+    order++;
+    res.render('treasures/init', {order:order});
+  });
 };
 
 exports.create = function(req, res){

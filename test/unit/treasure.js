@@ -46,8 +46,17 @@ describe('Treasure', function(){
 
   describe('.query', function(){
     it('should get all treasures', function(done){
-      Treasure.query({}, {}, function(err, treasures){
+      Treasure.query({}, function(err, treasures){
         expect(treasures).to.have.length(3);
+        done();
+      });
+    });
+  });
+
+  describe('.count', function(){
+    it('should return the number of treasure objects in the database', function(done){
+      Treasure.count(function(err, num){
+        expect(num).to.equal(3);
         done();
       });
     });

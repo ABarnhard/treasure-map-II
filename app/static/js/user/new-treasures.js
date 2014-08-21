@@ -14,6 +14,7 @@
     $i.attr('type', 'text');
     $i.attr('name', 'hints');
     $i.addClass('form-control');
+    $i.addClass('inserted');
     $('#hints').append($i);
   }
 
