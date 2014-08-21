@@ -16,6 +16,7 @@
     $i.addClass('form-control');
     $i.addClass('inserted');
     $('#hints').append($i);
+    $i.focus();
   }
 
   function addTreasure(e){
