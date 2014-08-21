@@ -7,13 +7,11 @@ exports.url = function(query, key, value, text){
       link = '<a href="/treasures?';
 
   q[key] = value;
-
   var properties = Object.keys(q).map(function(prop){
     return prop + '=' + q[prop];
   });
 
   link += properties.join('&');
-
   link += '">' + text + '</a>';
   return link;
 };
@@ -23,7 +21,7 @@ exports.tags = function(query, tags){
     return exports.url({}, 'tag', tag, tag);
   });
 
-  return links.join(',');
+  return links.join(', ');
 };
 
 exports.sort = function(query, name, display){
@@ -49,7 +47,8 @@ exports.difficulty = function(dif){
 exports.allowLink = function(t){
   var s = t.name;
   if(t.isLinkable){
-    s = '<a href="/treasures/'+t._id+'">'+t.name+'</a>';
+    var display = t.isFound ? '<img src="/img/pirate-flag.png" height="30px" width="30px" alt="yarr!" title="yarr!" />' : t.name;
+    s = '<a href="/treasures/'+t._id+'">'+display+'</a>';
   }
   return s;
 };

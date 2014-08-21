@@ -34,3 +34,8 @@ exports.show = function(req, res){
   });
 };
 
+exports.found = function(req, res){
+  Treasure.found(req.params.id, function(){
+    res.redirect('/treasures');
+  });
+};

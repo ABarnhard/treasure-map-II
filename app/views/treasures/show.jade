@@ -3,28 +3,28 @@ block content
   .panel.panel-default
     .panel-body
       .row
-        .col-xs-12#show
-          #map(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}')
+        .col-xs-6#show
+          h3 Map:
+          #map(style='height:200px;', data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}')
+        .col-xs-6
+          h3 Photos:
+          each photo in treasure.photos
+            .photo(style='background-image:url(#{photo})')
       .row
         .col-xs-12
-          table.table.table-hover
-            thead
-              tr
-                th!= linkBuilder.sort(query, 'name', 'Name')
-                th!= linkBuilder.sort(query, 'loc.name', 'Location')
-                th!= linkBuilder.sort(query, 'difficulty', 'Difficulty')
-                th Tags
-                th!= linkBuilder.sort(query, 'order',  'Order')
-                th!= linkBuilder.sort(query, 'isFound',  'Found')
-            tbody
-              each treasure in treasures
-                tr(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}', data-order='#{treasure.order}')
-                  td!= linkBuilder.allowLink(treasure)
-                  td= treasure.loc.name
-                  td= linkBuilder.difficulty(treasure.difficulty)
-                  td= treasure.tags
-                  td= treasure.order
-                  td= treasure.isFound
+          h3= treasure.name
+      .row
+        .col-xs-6
+          h5 Hints
+          ol
+            each hint in treasure.hints
+              li= hint
+        .col-xs-6
+          form(role='form', method='post', action='/treasures/#{treasure._id}/found')
+            unless treasure.isFound
+              button.btn.btn-primary.btn-lg(type='submit') Found It!!
+            else
+              a.btn.btn-primary.btn-lg(href='/treasures') View Treasures
 
 block scripts
   script(src='/js/user/show-treasures.js')
