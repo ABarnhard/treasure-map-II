@@ -32,3 +32,25 @@ exports.sort = function(query, name, display){
       link = '<a href="/treasures?sort=' + name + '&order=' + order + tag + '">'+display+'</a>';
   return link;
 };
+
+exports.difficulty = function(dif){
+  switch(dif){
+    case 1:
+      return 'Easy';
+    case 2:
+      return 'Medium';
+    case 3:
+      return 'Hard';
+    default:
+      return 'INSANE';
+  }
+};
+
+exports.allowLink = function(t){
+  var s = t.name;
+  if(t.isLinkable){
+    s = '<a href="/treasures/'+t._id+'">'+t.name+'</a>';
+  }
+  return s;
+};
+

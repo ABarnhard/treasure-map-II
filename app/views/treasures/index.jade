@@ -19,9 +19,9 @@ block content
             tbody
               each treasure in treasures
                 tr(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}', data-order='#{treasure.order}')
-                  td= treasure.name
+                  td!= linkBuilder.allowLink(treasure)
                   td= treasure.loc.name
-                  td= treasure.difficulty
+                  td= linkBuilder.difficulty(treasure.difficulty)
                   td= treasure.tags
                   td= treasure.order
                   td= treasure.isFound

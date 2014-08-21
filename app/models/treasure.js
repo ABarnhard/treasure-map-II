@@ -46,7 +46,12 @@ Treasure.findById = function(id, cb){
 
 Treasure.found = function(id, cb){
   id = Mongo.ObjectID(id);
-  Treasure.collection.update({_id:id}, {$set:{isFound:true}}, cb);
+  Treasure.collection.findOne({_id:id}, function(err, t){
+    Treasure.collection.update({_id:id}, {$set:{isFound:true}}, function(){
+      var next = t.order + 1;
+      Treasure.collection.update({order:next}, {$set:{isLinkable:true}}, cb);
+    });
+  });
 };
 
 Treasure.create = function(fields, files, cb){

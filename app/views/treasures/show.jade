@@ -1,0 +1,31 @@
+extends ../shared/template
+block content
+  .panel.panel-default
+    .panel-body
+      .row
+        .col-xs-12#show
+          #map(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}')
+      .row
+        .col-xs-12
+          table.table.table-hover
+            thead
+              tr
+                th!= linkBuilder.sort(query, 'name', 'Name')
+                th!= linkBuilder.sort(query, 'loc.name', 'Location')
+                th!= linkBuilder.sort(query, 'difficulty', 'Difficulty')
+                th Tags
+                th!= linkBuilder.sort(query, 'order',  'Order')
+                th!= linkBuilder.sort(query, 'isFound',  'Found')
+            tbody
+              each treasure in treasures
+                tr(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}', data-order='#{treasure.order}')
+                  td!= linkBuilder.allowLink(treasure)
+                  td= treasure.loc.name
+                  td= linkBuilder.difficulty(treasure.difficulty)
+                  td= treasure.tags
+                  td= treasure.order
+                  td= treasure.isFound
+
+block scripts
+  script(src='/js/user/show-treasures.js')
+
