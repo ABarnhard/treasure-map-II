@@ -24,7 +24,7 @@ block content
                   td= linkBuilder.difficulty(treasure.difficulty)
                   td!= linkBuilder.tags(query, treasure.tags)
                   td= treasure.order
-                  td= treasure.isFound
+                  td!= linkBuilder.displayFound(treasure.isFound)
 
 block scripts
   script(src='/js/user/treasures.js')

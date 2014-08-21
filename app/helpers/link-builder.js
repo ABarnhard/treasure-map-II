@@ -53,3 +53,7 @@ exports.allowLink = function(t){
   return s;
 };
 
+exports.displayFound = function(found){
+  var img = found ? 'open-chest.png' : 'closed-chest.png';
+  return '<img src="/img/'+img+'" height="50px" width="50px" />';
+};
