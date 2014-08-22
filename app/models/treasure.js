@@ -57,7 +57,14 @@ Treasure.found = function(id, cb){
 Treasure.create = function(fields, files, cb){
   var t = new Treasure(fields);
   t.save(function(){
-    t.addPhotos(files, cb);
+    if(t.order !== 1){
+      Treasure.collection.findOne({order:t.order-1}, function(err, prevT){
+        if(prevT.isFound){t.isLinkable = true;}
+        t.addPhotos(files, cb);
+      });
+    }else{
+      t.addPhotos(files, cb);
+    }
   });
 };
 
