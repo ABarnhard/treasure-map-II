@@ -1,4 +1,29 @@
+/* jshint expr:true */
+/* global describe, it, before, beforeEach */
 
+'use strict';
+
+var expect    = require('chai').expect,
+    Treasure  = require('../../app/models/treasure'),
+    Mongo     = require('mongodb'),
+    dbConnect = require('../../app/lib/mongodb'),
+    cp        = require('child_process'),
+    db        = 'treasure-map-test',
+    oid       = '000000000000000000000002',
+    obj       = {name:['Rubies'], difficulty:['1'], order:['4'], loc:['Unknown', '0', '0'], tags:['tag1, tag2'], photos:[], hints:['hint 1', 'hint 2']};
+
+describe('Treasure', function(){
+  before(function(done){
+    dbConnect(db, function(){
+      done();
+    });
+  });
+
+  beforeEach(function(done){
+    cp.execFile(__dirname + '/../scripts/clean-db.sh', [db], {cwd:__dirname + '/../scripts'}, function(err, stdout, stderr){
+      done();
+    });
+  });
 
   describe('constructor', function(){
     it('should create a new Person object', function(){
